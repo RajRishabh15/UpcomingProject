@@ -1,5 +1,311 @@
-/* Styles for the project */
-body {
+/* Dark Neon Custom Styles for OnePlus N6 Web UI */
+
+:root {
+    --primary-red: #ff003c;
+    --primary-red-glow: rgba(255, 0, 60, 0.6);
+    --neon-cyan: #00ffd2;
+    --neon-cyan-glow: rgba(0, 255, 210, 0.6);
+    --bg-dark: #07090e;
+    --bg-card: rgba(15, 18, 28, 0.6);
+    --text-main: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --border-color: rgba(255, 255, 255, 0.05);
+    --tab-active-bg: rgba(255, 255, 255, 0.03);
+    --transition-speed: 0.4s;
+    --easing: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* {
+    box-sizing: border-box;
     margin: 0;
-    font-family: sans-serif;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background: radial-gradient(circle at 50% 50%, #101424 0%, var(--bg-dark) 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Background Glitter Styles */
+.glitter-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.glitter-dot {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color), 0 0 16px var(--color);
+    opacity: 0;
+    animation: floatAround var(--speed) linear infinite;
+    animation-delay: var(--delay);
+    bottom: -20px;
+}
+
+@keyframes floatAround {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.3);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.8;
+    }
+    85% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-115vh) translateX(var(--drift)) scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* Header Styles */
+.site-header {
+    width: 100%;
+    height: 70px;
+    background: rgba(7, 9, 14, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
+    user-select: none;
+    text-shadow: 0 0 8px var(--neon-cyan-glow);
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--text-main);
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+.nav-link.active {
+    color: var(--neon-cyan);
+    font-weight: 600;
+    text-shadow: 0 0 10px var(--neon-cyan-glow);
+}
+
+.btn-notify {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid var(--primary-red);
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--primary-red-glow), inset 0 0 8px rgba(255, 0, 60, 0.2);
+    text-shadow: 0 0 6px #ffffff;
+    transition: all 0.3s var(--easing);
+}
+
+.btn-notify:hover {
+    background-color: var(--primary-red);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--primary-red-glow), 0 5px 15px rgba(255, 0, 60, 0.3);
+}
+
+.btn-notify:active {
+    transform: translateY(0);
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    margin-top: 70px;
+    margin-bottom: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+/* Tab Navigation Bar Styles */
+.tab-navigation-bar {
+    width: 100%;
+    height: 90px;
+    background-color: rgba(7, 9, 14, 0.65);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-top: 1px solid var(--border-color);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.tabs-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.3s var(--easing);
+    color: var(--text-secondary);
+    position: relative;
+    outline: none;
+}
+
+.tab-btn:last-child {
+    border-right: none;
+}
+
+.tab-btn:hover {
+    background-color: rgba(255, 255, 255, 0.015);
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px var(--neon-cyan-glow);
+}
+
+.tab-btn:hover .tab-icon {
+    transform: translateY(-2px) scale(1.08);
+}
+
+.tab-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s var(--easing);
+}
+
+.tab-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    transition: stroke 0.3s;
+}
+
+.tab-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+}
+
+/* Active Tab Styles */
+.tab-btn.active {
+    background-color: var(--tab-active-bg);
+    color: var(--neon-cyan);
+    text-shadow: 0 0 12px var(--neon-cyan-glow);
+}
+
+.tab-btn.active .tab-icon {
+    transform: translateY(0) scale(1.08);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-red);
+    box-shadow: 0 -2px 10px var(--primary-red-glow), 0 0 15px var(--primary-red);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+    .tabs-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    .tab-navigation-bar {
+        height: 120px;
+    }
+    .main-content {
+        margin-bottom: 120px;
+    }
+    .tab-btn {
+        border-bottom: 1px solid var(--border-color);
+    }
+    .tab-btn:nth-child(4), .tab-btn:nth-child(8) {
+        border-right: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0 20px;
+    }
+    .header-nav .nav-link {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabs-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    .tab-btn .tab-label {
+        font-size: 10px;
+    }
+    .tab-btn .tab-icon {
+        width: 18px;
+        height: 18px;
+    }
+    .btn-notify {
+        padding: 6px 16px;
+        font-size: 12px;
+    }
 }
