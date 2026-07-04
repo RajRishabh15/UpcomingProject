@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TasteRadar - Discover Famous Local Food Origins</title>
-    <meta name="description" content="Discover famous local delicacies pinned to their origins across India and the world.">
+    <meta name="description"
+        content="Discover famous local delicacies pinned to their origins across India and the world.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+
 <body>
 
-    <!-- Glitters injected by JS -->
-
+    <!-- PixelBlast Background -->
+    <div id="pixelblast-bg"></div>
     <!-- ===== HEADER ===== -->
     <header class="app-header">
         <div class="logo-group">
@@ -25,77 +30,60 @@
 
     <!-- ===== MAIN CONTENT ===== -->
     <main class="main-content">
-
-        <!-- Search & Filters -->
-        <div class="search-section">
-            <div class="search-wrapper">
-                <span class="search-icon-emoji">🔍</span>
-                <input type="text" id="searchInput" class="search-input"
-                    placeholder="Search by country or state (e.g. India, Kerala, Japan)…"
-                    autocomplete="off">
-            </div>
-
-            <div class="quick-tags">
-                <button class="quick-tag" data-search="India">🇮🇳 India</button>
-                <button class="quick-tag" data-search="Kerala">🌴 Kerala</button>
-                <button class="quick-tag" data-search="Japan">🇯🇵 Japan</button>
-                <button class="quick-tag" data-search="Italy">🇮🇹 Italy</button>
-                <button class="quick-tag" data-search="Texas">🇺🇸 Texas</button>
-            </div>
-
-            <div class="filter-row">
-                <span class="filter-label">CATEGORIES:</span>
-                <div class="chips" id="chips">
-                    <button class="chip active" data-cat="All">All</button>
-                    <button class="chip" data-cat="Savory">Savory</button>
-                    <button class="chip" data-cat="Spicy">Spicy</button>
-                    <button class="chip" data-cat="Seafood">Seafood</button>
-                    <button class="chip" data-cat="Meat">Meat</button>
-                    <button class="chip" data-cat="Sweet">Sweet</button>
-                    <button class="chip" data-cat="Street Food">Street Food</button>
-                </div>
-            </div>
-
-            <p class="results-label" id="resultsLabel">Showing all delicacies</p>
-        </div>
-
-        <!-- Cards Grid -->
-        <div class="cards-grid" id="dishList"></div>
-
     </main>
 
     <!-- ===== BOTTOM TAB BAR ===== -->
     <footer class="tab-bar">
         <button class="tab active" data-region="All">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+            </svg>
             <span>All Foods</span>
         </button>
         <button class="tab" data-region="North">
-            <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+            <svg viewBox="0 0 24 24">
+                <polyline points="18 15 12 9 6 15" />
+            </svg>
             <span>North India</span>
         </button>
         <button class="tab" data-region="South">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            <svg viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9" />
+            </svg>
             <span>South India</span>
         </button>
         <button class="tab" data-region="East">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            <svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6" />
+            </svg>
             <span>East India</span>
         </button>
         <button class="tab" data-region="West">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            <svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+            </svg>
             <span>West India</span>
         </button>
         <button class="tab" data-cat="Street Food">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
             <span>Street Food</span>
         </button>
         <button class="tab" data-cat="Sweet">
-            <svg viewBox="0 0 24 24"><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
             <span>Sweets</span>
         </button>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
+
 </html>
