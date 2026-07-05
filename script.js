@@ -1,6 +1,6 @@
 // TasteRadar — script.js
 
-import { initPrism } from './prism.js';
+import { initLightfall } from './lightfall.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -10,20 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab');
 
     // ============================================================
-    //  PRISM BACKGROUND
+    //  LIGHTFALL BACKGROUND
     // ============================================================
-    const bgContainer = document.getElementById('prism-bg');
+    const bgContainer = document.getElementById('lightfall-bg');
     if (bgContainer) {
-        initPrism(bgContainer, {
-            animationType: "rotate",
-            timeScale: 0.5,
-            height: 3.5,
-            baseWidth: 5.5,
-            scale: 3.6,
-            hueShift: 0,
-            colorFrequency: 1,
-            noise: 0,
-            glow: 1
+        initLightfall(bgContainer, {
+            colors: ['#A6C8FF', '#5227FF', '#FF9FFC'],
+            backgroundColor: "#0A29FF",
+            speed: 0.5,
+            streakCount: 2,
+            streakWidth: 1,
+            streakLength: 1,
+            glow: 1,
+            density: 0.6,
+            twinkle: 1,
+            zoom: 3,
+            backgroundGlow: 0.5,
+            opacity: 1,
+            mouseInteraction: true,
+            mouseStrength: 0.5,
+            mouseRadius: 1
         });
     }
 
