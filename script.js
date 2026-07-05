@@ -1,6 +1,6 @@
 // TasteRadar — script.js
 
-import { initPixelBlast } from './pixelblast.js';
+import { initPrism } from './prism.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -10,28 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab');
 
     // ============================================================
-    //  PIXELBLAST BACKGROUND
+    //  PRISM BACKGROUND
     // ============================================================
-    const bgContainer = document.getElementById('pixelblast-bg');
+    const bgContainer = document.getElementById('prism-bg');
     if (bgContainer) {
-        initPixelBlast(bgContainer, {
-            variant: "square",
-            pixelSize: 4,
-            color: "#B497CF",
-            patternScale: 2,
-            patternDensity: 1.5,
-            pixelSizeJitter: 0,
-            enableRipples: true,
-            rippleSpeed: 0.4,
-            rippleThickness: 0.12,
-            rippleIntensityScale: 1.5,
-            liquid: false,
-            liquidStrength: 0.12,
-            liquidRadius: 1.2,
-            liquidWobbleSpeed: 5,
-            speed: 0.5,
-            edgeFade: 0.25,
-            transparent: true
+        initPrism(bgContainer, {
+            animationType: "rotate",
+            timeScale: 0.5,
+            height: 3.5,
+            baseWidth: 5.5,
+            scale: 3.6,
+            hueShift: 0,
+            colorFrequency: 1,
+            noise: 0,
+            glow: 1
         });
     }
 
