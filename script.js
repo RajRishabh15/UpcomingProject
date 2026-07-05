@@ -61,47 +61,52 @@ document.addEventListener('DOMContentLoaded', () => {
         if (span) {
             tab.setAttribute('data-tooltip', span.textContent);
         }
+        tab._currentSize = baseItemSize;
     });
 
     if (tabBar) {
+        let mouseX = null;
+
         tabBar.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX;
-
-            tabButtons.forEach(tab => {
-                const rect = tab.getBoundingClientRect();
-                const tabCenterX = rect.left + rect.width / 2;
-                const diffX = Math.abs(mouseX - tabCenterX);
-
-                let size = baseItemSize;
-                if (diffX < distance) {
-                    // Smooth scaling curve based on distance
-                    const progress = 1 - (diffX / distance);
-                    size = baseItemSize + (maxItemSize - baseItemSize) * Math.sin(progress * Math.PI / 2);
-                }
-
-                tab.style.width = `${size}px`;
-                tab.style.height = `${size}px`;
-
-                const svg = tab.querySelector('svg');
-                if (svg) {
-                    const iconScale = size / baseItemSize;
-                    svg.style.width = `${24 * iconScale}px`;
-                    svg.style.height = `${24 * iconScale}px`;
-                }
-            });
+            mouseX = e.clientX;
         });
 
         tabBar.addEventListener('mouseleave', () => {
+            mouseX = null;
+        });
+
+        const animate = () => {
             tabButtons.forEach(tab => {
-                tab.style.width = `${baseItemSize}px`;
-                tab.style.height = `${baseItemSize}px`;
+                let targetSize = baseItemSize;
+
+                if (mouseX !== null) {
+                    const rect = tab.getBoundingClientRect();
+                    const tabCenterX = rect.left + rect.width / 2;
+                    const diffX = Math.abs(mouseX - tabCenterX);
+
+                    if (diffX < distance) {
+                        // Smooth scaling curve based on distance
+                        const progress = 1 - (diffX / distance);
+                        targetSize = baseItemSize + (maxItemSize - baseItemSize) * Math.sin(progress * Math.PI / 2);
+                    }
+                }
+
+                // Lerp towards targetSize
+                tab._currentSize += (targetSize - tab._currentSize) * 0.25;
+
+                tab.style.width = `${tab._currentSize}px`;
+                tab.style.height = `${tab._currentSize}px`;
 
                 const svg = tab.querySelector('svg');
                 if (svg) {
-                    svg.style.width = `24px`;
-                    svg.style.height = `24px`;
+                    const iconScale = tab._currentSize / baseItemSize;
+                    svg.style.width = `${20 * iconScale}px`;
+                    svg.style.height = `${20 * iconScale}px`;
                 }
             });
-        });
+            requestAnimationFrame(animate);
+        };
+        
+        animate();
     }
 });
